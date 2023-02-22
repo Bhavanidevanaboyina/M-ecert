@@ -72,7 +72,7 @@ public class AuthenticationDao {
 			String hubbletoken = "";
 			List<Map<String, Object>> dataList = new ArrayList<>();
 			try {
-				String query = "SELECT employe_id, employe_name, phoneNumber,email FROM Employe WHERE loginId=?";
+				String query = "SELECT employe_id, employe_name, phoneNumber,email FROM ecert.Employe WHERE loginId=?";
 
 				dataList = jdbcTemplate.queryForList(query, loginId);
 				System.out.println(dataList);

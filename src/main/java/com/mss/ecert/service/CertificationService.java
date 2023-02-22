@@ -28,8 +28,13 @@ public class CertificationService {
 	}
 
 	public QuestionPaper createQuestions(QuestionPaper questionPaper) {
-		// TODO Auto-generated method stub
+		
 		return questionPaperRepository.save(questionPaper);
+	}
+
+	public List<Certification> getCertificationIdByName(String certificationname) {
+		// TODO Auto-generated method stub
+		return certificationRepository.findCertificationIdByName(certificationname);
 	}
 
 }

@@ -52,6 +52,7 @@ public class JwtAuthenticationController {
 		claims.put("middleName", authenticationRequest.getMiddleName());
 		claims.put("lastName", authenticationRequest.getLastName());
 		claims.put("gender", authenticationRequest.getGender());
+		claims.put("profilePic", authenticationRequest.getProfilePic());
 		
 		
 		final String token = jwtTokenUtil.generateToken(userDetails, claims);

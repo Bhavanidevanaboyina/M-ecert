@@ -22,6 +22,8 @@ public class JwtRequest implements Serializable {
 	private String firstName;
 	private String middleName;
 	private String gender;
+	private String profilePic;
+	
 	
 
 }

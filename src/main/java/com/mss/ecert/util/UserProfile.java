@@ -1,5 +1,6 @@
 package com.mss.ecert.util;
 
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -28,6 +29,14 @@ public class UserProfile {
 	UserRepository userRepository;
 
 	public void storeUserInformation(JSONObject jsonObject) {
+		String userName = jsonObject.getString("loginId");
+		
+		  Optional<User> existingUser = userRepository.findByUserName(userName);
+
+		    if (existingUser.isPresent()) {
+		        // user already exists in the database, do not save
+		        return;
+		    }
 		// TODO Auto-generated method stub
 		//int id=jsonObject.getInt("empId");
 		String name=jsonObject.getString("firstName")+" "+jsonObject.getString("middleName")+" "+jsonObject.getString("lastName");

@@ -32,7 +32,7 @@ public class ApiUtility {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	String localUrl = "http://172.17.12.110:8081";
+	String localUrl = "http://172.17.12.110:8083";
 
 	public String generateToken(String loginId, JSONObject jsonObject) {
 		logger.info("Entered into generateToken method of ApiUtility");
@@ -105,7 +105,12 @@ public class ApiUtility {
 				if (jsonObject.get("gender") != null && !"".equals(jsonObject.get("gender").toString().trim())) {
 					jsonCredentials.put("gender", jsonObject.get("gender"));
 				}
-
+				
+				jsonCredentials.put("profilePic", "");
+				if (jsonObject.get("profilePic") != null && !"".equals(jsonObject.get("profilePic").toString().trim())) {
+					jsonCredentials.put("profilePic", jsonObject.get("profilePic"));
+				}
+               
 			}
 
 			HttpEntity<String> entityCredentials = new HttpEntity<>(jsonCredentials.toString(), httpHeaders);

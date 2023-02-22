@@ -47,4 +47,6 @@ public class Certification extends Auditable<String>{
     @CollectionTable(name = "assigned", joinColumns = @JoinColumn(name = "FK_quiztaken_certification"))
     @Column(name = "quiztaken")
     private List<String> quiztaken;
+	
+	private String status;
 }

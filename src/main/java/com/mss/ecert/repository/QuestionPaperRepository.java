@@ -3,6 +3,7 @@ package com.mss.ecert.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.mss.ecert.domain.QuestionPaper;
@@ -14,5 +15,7 @@ public interface QuestionPaperRepository extends JpaRepository<QuestionPaper, In
 	 @Query(value = "SELECT certificationid FROM certification WHERE certificationname =:certificationname", nativeQuery = true)
 	    String findIdByName(@Param("certificationname") String certificationname);
 
+	
 
+    
 }

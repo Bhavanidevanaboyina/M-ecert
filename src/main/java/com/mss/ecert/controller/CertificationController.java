@@ -1,5 +1,6 @@
 package com.mss.ecert.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,35 +39,43 @@ public class CertificationController {
 	public List<Certification> getAllCertificates() {
 		return certificationService.getAllCertificates();
 	}
+	
+	
+	@GetMapping("/getAllCertificatesById/{certificationname}")
+	public List<Certification> getCertificationIdByName(@PathVariable String certificationname) {
+		return certificationService.getCertificationIdByName(certificationname);
+	}
 
 	@PostMapping("/manager/createQuestions/{hubbleId}/{certificationname}")
-	public QuestionPaper createQuestions(@RequestBody QuestionPaper data, @PathVariable int hubbleId,@PathVariable String certificationname) {
-		QuestionPaper questionPaper = initQuestionPaper(data, hubbleId,certificationname);
-		return certificationService.createQuestions(questionPaper);
+	public List<QuestionPaper> createQuestions(@RequestBody List<QuestionPaper> data, @PathVariable int hubbleId,@PathVariable String certificationname) {
+	    List<QuestionPaper> questionPapers = new ArrayList<>();
+	    for (QuestionPaper question : data) {
+	        QuestionPaper questionPaper = initQuestionPaper(question, hubbleId, certificationname);
+	        questionPapers.add(certificationService.createQuestions(questionPaper));
+	    }
+	    return questionPapers;
 	}
 
 	private QuestionPaper initQuestionPaper(QuestionPaper data, int hubbleId, String certificationname) {
-		QuestionPaper details = new QuestionPaper();
-		String name;
-		name = userRepository.findIdByName(hubbleId);
-		details.setQuestion(data.getQuestion());
-		details.setChoice01(data.getChoice01());
-		details.setChoice2(data.getChoice2());
-		details.setChoice3(data.getChoice3());
-		details.setChoice4(data.getChoice4());
-		details.setMarkedOption(data.getMarkedOption());
-		details.setCreatedBy(name);
-		details.setLastModifiedBy(name);
-		details.setCreationDate(java.time.LocalDate.now());
-		details.setLastModifiedDate(java.time.LocalDate.now());
-		
-		String certificateId = questionPaperRepository.findIdByName(certificationname);
-		Certification certification = new Certification();
-		certification.setCertificationid(certificateId);
-		details.setCertification(certification);
-		return details;
-	}
+	    QuestionPaper details = new QuestionPaper();
+	    String name = userRepository.findIdByName(hubbleId);
+	    details.setQuestion(data.getQuestion());
+	    details.setChoice01(data.getChoice01());
+	    details.setChoice2(data.getChoice2());
+	    details.setChoice3(data.getChoice3());
+	    details.setChoice4(data.getChoice4());
+	    details.setMarkedOption(data.getMarkedOption());
+	    details.setCreatedBy(name);
+	    details.setLastModifiedBy(name);
+	    details.setCreationDate(java.time.LocalDate.now());
+	    details.setLastModifiedDate(java.time.LocalDate.now());
 
+	    String certificateId = questionPaperRepository.findIdByName(certificationname);
+	    Certification certification = new Certification();
+	    certification.setCertificationid(certificateId);
+	    details.setCertification(certification);
+	    return details;
+	}
 	private Certification initCertification(Certification data, int hubbleId) {
 		Certification details = new Certification();
 		String name;
@@ -83,6 +92,7 @@ public class CertificationController {
 		details.setCreatedBy(name);
 		details.setLastModifiedBy(name);
 		details.setLastModifiedDate(java.time.LocalDate.now());
+		details.setStatus(data.getStatus());
 		return details;
 	}
 
