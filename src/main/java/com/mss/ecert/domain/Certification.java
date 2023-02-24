@@ -37,16 +37,22 @@ public class Certification extends Auditable<String>{
 	@Column(name = "certificationnotice")
 	private String certificationnotice;
 	@Column(name = "certificationtime")
-	private int certificationtime;
+	private String certificationtime;
 
-	@ElementCollection
-    @CollectionTable(name = "assigned", joinColumns = @JoinColumn(name = "FK_assigned_certification"))
-    @Column(name = "assigned")
-    private List<String> assigned;
-	@ElementCollection
-    @CollectionTable(name = "assigned", joinColumns = @JoinColumn(name = "FK_quiztaken_certification"))
-    @Column(name = "quiztaken")
-    private List<String> quiztaken;
+	 @ElementCollection
+	    @CollectionTable(name = "certification_assigned", joinColumns = @JoinColumn(name = "certification_id"))
+	    @Column(name = "assigned")
+	    private List<String> assigned;
+	    
+	    @ElementCollection
+	    @CollectionTable(name = "certification_quiztaken", joinColumns = @JoinColumn(name = "certification_id"))
+	    @Column(name = "quiztaken")
+	    private List<String> quiztaken;
+	    
+	    @ElementCollection
+	    @CollectionTable(name = "certification_tags", joinColumns = @JoinColumn(name = "certification_id"))
+	    @Column(name = "tags")
+	    private List<String> tags;
 	
 	private String status;
 }

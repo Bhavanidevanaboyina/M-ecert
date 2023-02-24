@@ -81,8 +81,8 @@ public class ApiUtility {
 				}
 				
 				jsonCredentials.put("hubble_id", "");
-				if (jsonObject.get("empId") != null && !"".equals(jsonObject.get("empId").toString().trim())) {
-					jsonCredentials.put("hubble_id", jsonObject.get("empId"));
+				if (jsonObject.get("empNo") != null && !"".equals(jsonObject.get("empNo").toString().trim())) {
+					jsonCredentials.put("hubble_id", jsonObject.get("empNo"));
 				}
 					
 				

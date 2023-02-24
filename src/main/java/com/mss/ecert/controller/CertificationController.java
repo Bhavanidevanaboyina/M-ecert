@@ -46,17 +46,17 @@ public class CertificationController {
 		return certificationService.getCertificationIdByName(certificationname);
 	}
 
-	@PostMapping("/manager/createQuestions/{hubbleId}/{certificationname}")
-	public List<QuestionPaper> createQuestions(@RequestBody List<QuestionPaper> data, @PathVariable int hubbleId,@PathVariable String certificationname) {
+	@PostMapping("/manager/createQuestions/{hubbleId}/{certificationId}")
+	public List<QuestionPaper> createQuestions(@RequestBody List<QuestionPaper> data, @PathVariable int hubbleId,@PathVariable String certificationId) {
 	    List<QuestionPaper> questionPapers = new ArrayList<>();
 	    for (QuestionPaper question : data) {
-	        QuestionPaper questionPaper = initQuestionPaper(question, hubbleId, certificationname);
+	        QuestionPaper questionPaper = initQuestionPaper(question, hubbleId, certificationId);
 	        questionPapers.add(certificationService.createQuestions(questionPaper));
 	    }
 	    return questionPapers;
 	}
 
-	private QuestionPaper initQuestionPaper(QuestionPaper data, int hubbleId, String certificationname) {
+	private QuestionPaper initQuestionPaper(QuestionPaper data, int hubbleId, String certificationId) {
 	    QuestionPaper details = new QuestionPaper();
 	    String name = userRepository.findIdByName(hubbleId);
 	    details.setQuestion(data.getQuestion());
@@ -70,9 +70,9 @@ public class CertificationController {
 	    details.setCreationDate(java.time.LocalDate.now());
 	    details.setLastModifiedDate(java.time.LocalDate.now());
 
-	    String certificateId = questionPaperRepository.findIdByName(certificationname);
+//	    String certificateId = questionPaperRepository.findIdByName(certificationId);
 	    Certification certification = new Certification();
-	    certification.setCertificationid(certificateId);
+	    certification.setCertificationid(certificationId);
 	    details.setCertification(certification);
 	    return details;
 	}
@@ -81,7 +81,8 @@ public class CertificationController {
 		String name;
 		name = userRepository.findIdByName(hubbleId);
 		
-		details.setCertificationid(UUID.randomUUID().toString());
+		//details.setCertificationid(UUID.randomUUID().toString());
+		details.setCertificationid(data.getCertificationid());
 		details.setCertificationname(data.getCertificationname());
 		details.setCertificationdescription(data.getCertificationdescription());
 		details.setCertificationnotice(data.getCertificationnotice());
@@ -92,6 +93,7 @@ public class CertificationController {
 		details.setCreatedBy(name);
 		details.setLastModifiedBy(name);
 		details.setLastModifiedDate(java.time.LocalDate.now());
+		details.setTags(data.getTags());
 		details.setStatus(data.getStatus());
 		return details;
 	}
