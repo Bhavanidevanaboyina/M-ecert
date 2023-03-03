@@ -2,6 +2,7 @@ package com.mss.ecert.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +33,12 @@ public class CertificationService {
 		return questionPaperRepository.save(questionPaper);
 	}
 
-	public List<Certification> getCertificationIdByName(String certificationname) {
+	public List<Certification> getCertificationById(String certificationid) {
 		// TODO Auto-generated method stub
-		return certificationRepository.findCertificationIdByName(certificationname);
+		System.out.println("method entered");
+		return certificationRepository.findCertificationById(certificationid);
 	}
+
+	
 
 }

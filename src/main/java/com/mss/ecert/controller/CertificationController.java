@@ -41,10 +41,13 @@ public class CertificationController {
 	}
 	
 	
-	@GetMapping("/getAllCertificatesById/{certificationname}")
-	public List<Certification> getCertificationIdByName(@PathVariable String certificationname) {
-		return certificationService.getCertificationIdByName(certificationname);
+	@GetMapping("/getAllCertificatesById/{certificationid}")
+	public List<Certification> getCertificationById(@PathVariable String certificationid) {
+		System.out.println("welcome");
+		return certificationService.getCertificationById(certificationid);
 	}
+	
+	
 
 	@PostMapping("/manager/createQuestions/{hubbleId}/{certificationId}")
 	public List<QuestionPaper> createQuestions(@RequestBody List<QuestionPaper> data, @PathVariable int hubbleId,@PathVariable String certificationId) {

@@ -12,6 +12,9 @@ import com.mss.ecert.domain.Certification;
 @Repository
 public interface CertificationRepository extends JpaRepository<Certification, String> {
 
-	 @Query(value = "SELECT * FROM certification WHERE certificationname = :certificationname", nativeQuery = true)
-	 List<Certification> findCertificationIdByName(@Param("certificationname") String certificationname);
+//	 @Query(value = "SELECT * FROM certification WHERE certificationname = :certificationname", nativeQuery = true)
+//	 List<Certification> findCertificationIdByName(@Param("certificationname") String certificationname);
+	
+	@Query(value = "SELECT * FROM certification WHERE certificationid = :certificationid", nativeQuery = true)
+	List<Certification> findCertificationById(@Param("certificationid") String certificationId);
 }

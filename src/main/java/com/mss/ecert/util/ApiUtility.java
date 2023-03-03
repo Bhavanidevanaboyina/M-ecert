@@ -32,7 +32,7 @@ public class ApiUtility {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	String localUrl = "http://172.17.12.110:8083";
+	String localUrl = "https://dev-ecert-api.miraclesoft.com/ecert";
 
 	public String generateToken(String loginId, JSONObject jsonObject) {
 		logger.info("Entered into generateToken method of ApiUtility");
